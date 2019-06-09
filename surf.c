@@ -2111,7 +2111,7 @@ main(int argc, char *argv[])
 	if (argc > 0)
 		arg.v = argv[0];
 	else
-		arg.v = "about:blank";
+		arg.v = "file:///home/jaenek/.config/homepage/homepage.html";
 
 	setup();
 	c = newclient(NULL);
