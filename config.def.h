@@ -11,8 +11,7 @@ static char *cookiefile     = "~/.surf/cookies.txt";
 /* Highest priority value will be used.
  * Default parameters are priority 0
  * Per-uri parameters are priority 1
- * Command parameters are priority 2
- */
+ * Command parameters are priority 2 */
 static Parameter defconfig[ParameterLast] = {
 	/* parameter                    Arg value       priority */
 	[AcceleratedCanvas]   =       { { .i = 1 },     },
@@ -29,7 +28,7 @@ static Parameter defconfig[ParameterLast] = {
 	[FrameFlattening]     =       { { .i = 0 },     },
 	[Geolocation]         =       { { .i = 0 },     },
 	[HideBackground]      =       { { .i = 0 },     },
-	[Inspector]           =       { { .i = 0 },     },
+	[Inspector]           =       { { .i = 1 },     },
 	[Java]                =       { { .i = 1 },     },
 	[JavaScript]          =       { { .i = 1 },     },
 	[KioskMode]           =       { { .i = 0 },     },
@@ -41,17 +40,18 @@ static Parameter defconfig[ParameterLast] = {
 	[ScrollBars]          =       { { .i = 1 },     },
 	[ShowIndicators]      =       { { .i = 1 },     },
 	[SiteQuirks]          =       { { .i = 1 },     },
-	[SmoothScrolling]     =       { { .i = 0 },     },
+	[SmoothScrolling]     =       { { .i = 1 },     },
 	[SpellChecking]       =       { { .i = 0 },     },
 	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
 	[StrictTLS]           =       { { .i = 1 },     },
 	[Style]               =       { { .i = 1 },     },
-	[WebGL]               =       { { .i = 0 },     },
+	[WebGL]               =       { { .i = 1 },     },
 	[ZoomLevel]           =       { { .f = 1.0 },   },
 };
 
+/* site specific features configuration */
 static UriParameters uriparams[] = {
-	{ "(://|\\.)suckless\\.org(/|$)", {
+	{ "(://|\\.)website\\.com(/|$)", {
 	  [JavaScript] = { { .i = 0 }, 1 },
 	  [Plugins]    = { { .i = 0 }, 1 },
 	}, },
@@ -121,7 +121,7 @@ static SiteSpecific certs[] = {
 	{ "://suckless\\.org/", "suckless.org.crt" },
 };
 
-#define MODKEY GDK_CONTROL_MASK
+#define MODKEY GDK_MOD1_MASK
 
 /* hotkeys */
 /*
@@ -131,7 +131,6 @@ static SiteSpecific certs[] = {
 static Key keys[] = {
 	/* modifier              keyval          function    arg */
 	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
-	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
